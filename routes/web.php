@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Post\Posts;
+use App\Livewire\Post\ShowPost;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'post.index')->name('home');
+Route::get('/',             Posts::class)->name('post.index');
+Route::get('/post/{id}',    ShowPost::class)->name('post.show');
 
 Route::view('dashboard', 'profile.dashboard')
     ->middleware(['auth', 'verified'])
