@@ -13,7 +13,7 @@ class DeleteInactivePosts extends Command
      *
      * @var string
      */
-    protected $signature = 'delete:inactiv-posts';
+    protected $signature = 'delete:inactive-posts';
 
     /**
      * The console command description.

@@ -67,6 +67,6 @@
 
 9. Daily cron job 'DeleteInactivePosts' command which 'delete all posts that have not received a comment for a year'
     ```bash
-    php artisan queue:work
+    php artisan schedule:work
 
 Access the application in your browser at http://127.0.0.1:8000.
