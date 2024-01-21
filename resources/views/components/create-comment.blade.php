@@ -1,5 +1,3 @@
-@props(['comment' => ''])
-
 <form style="margin: 10px 0 30px 0;">
     <div class="form-group">
         <label for="comment">Your Comment:</label>

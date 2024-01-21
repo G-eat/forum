@@ -3,6 +3,7 @@
 namespace App\Livewire\Comment;
 
 use App\Models\Comment;
+use App\Notifications\NewCommentNotification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -44,11 +45,14 @@ class Comments extends Component
         $this->validateOnly('comment');
 
         // Save the comment to the database
-        Comment::create([
+        $comment = Comment::create([
             'text'      => $this->comment,
             'user_id'   => auth()->id(),
             'post_id'   => $this->postId
         ]);
+
+        // send author of the post an email that one new comment its added
+        /* $comment->user->notify(new NewCommentNotification($comment)); */
 
         // Reset the comment field after saving
         $this->comment = '';
@@ -69,6 +73,7 @@ class Comments extends Component
         // Update the comment to the database
         Comment::whereId($id)->where('user_id',auth()->id())->update([
             'text'      => $this->newComment,
+            'edited_at' => now()
         ]);
 
         // Reset field after saving

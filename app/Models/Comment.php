@@ -27,4 +27,11 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    // Accessor for the created_at attribute
+    public function getCreatedAtAttribute($value)
+    {
+        // $value contains the original timestamp value
+        return \Carbon\Carbon::parse($value)->format('Y-m-d H:i');
+    }
 }

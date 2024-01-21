@@ -1,7 +1,11 @@
 <?php
 
 use App\Livewire\Post\Posts;
+use App\Livewire\User\Posts as UserPosts;
 use App\Livewire\Post\ShowPost;
+use App\Livewire\User\CreatePost;
+use App\Livewire\User\Profile;
+use App\Livewire\User\UpdatePost;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',             Posts::class)->name('post.index');
-Route::get('/post/{id}',    ShowPost::class)->name('post.show');
+Route::group(['as' => 'post.'], function () {
+    Route::get('/',                     Posts::class)->name('index');
+    Route::get('/post/{id}',            ShowPost::class)->name('show');
+});
 
-Route::view('dashboard', 'profile.dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::group(['middleware' => 'auth', 'as' => 'user.'], function () {
+    Route::get('/profile',              Profile::class)->middleware(['auth'])->name('profile');
+    Route::get('/dashboard',            UserPosts::class)->middleware(['auth'])->name('posts');
+    Route::get('/create-post',          CreatePost::class)->middleware(['can:create-post'])->name('create-post');
+    Route::get('/update-post/{post}',   UpdatePost::class)->middleware(['auth'])->name('update-post');
+});
 
-Route::view('profile', 'profile.profile')
-    ->middleware(['auth'])
-    ->name('profile');
 
 require __DIR__.'/auth.php';

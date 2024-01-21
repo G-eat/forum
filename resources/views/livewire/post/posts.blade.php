@@ -21,7 +21,7 @@
 
                             @auth
                                 @if(auth()->user()->id === $post->user->id)
-                                    <a href="{{ route('post.show',[$id = $post->id]) }}" class="text-decoration-underline text-warning" style="float: right">Edit post</a>
+                                    <a href="{{ route('user.update-post',['post' => $post->id] )}}" class="text-decoration-underline text-warning" style="float: right">Edit post</a>
                                 @endif
                             @endauth
                         </div>

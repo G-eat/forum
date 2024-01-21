@@ -11,7 +11,7 @@ class Posts extends Component
 {
     use WithPagination;
 
-    #[Validate('required|string')]
+    #[Validate('sometimes|string')]
     public $search = '';
 
     public function render()

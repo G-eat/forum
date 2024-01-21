@@ -4,16 +4,16 @@
         @can('create-comment')
             <x-create-comment></x-create-comment>
         @else
-            <p class="mb-3">To leave a comment you need to <a href="" class="text-decoration-underline text-primary">verify email.</a></p>
+            <p class="mb-3">To leave a comment you need to <a href="{{ route('verification.notice') }}" class="text-decoration-underline text-primary">verify email.</a></p>
             <hr>
         @endcan      
     @else
-        <a href="" class="text-decoration-underline text-primary">Login to comment</a>
+        <a href="{{ route('login') }}" class="text-decoration-underline text-primary">Login to comment</a>
     @endauth
 
-    <h2 class="card-title mb-0 mt-2 mb-2">All comments</h2>
+    <h1 style="font-size: 20px;font-weight:700" class="mt-2 mb-2">All comments</h1>
 
-    @foreach ($comments as $comment)
+    @forelse ($comments as $comment)
         <div class="card" wire:key="{{ $comment->id }}">
             <div class="card-body">
                 @if ($editingCommentId == $comment->id)
@@ -38,7 +38,9 @@
             </div>
         </div>
         <br>
-    @endforeach
+    @empty
+        <p class="text-muted">No commets yet.</p>
+    @endforelse
 
     {{ $comments->links() }}
 </div>
