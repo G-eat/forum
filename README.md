@@ -59,7 +59,7 @@
 7. Npm
     ```bash
     npm install
-    npm run buil
+    npm run build
 
 8. Start the Laravel development server:
     ```bash
