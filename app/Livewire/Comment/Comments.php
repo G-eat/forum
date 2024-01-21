@@ -29,7 +29,7 @@ class Comments extends Component
 
     public function render()
     {
-        $comments = Comment::where('post_id',$this->postId)->select('id','text','post_id','user_id','created_at')->with('user:id,name')->orderBy('created_at','DESC')->paginate(10);;
+        $comments = Comment::select('id','text','post_id','user_id','created_at')->where('post_id',$this->postId)->with('user:id,name')->orderBy('created_at','DESC')->paginate(10);
 
         return view('livewire.comment.comments',[
             'comments' => $comments
@@ -38,7 +38,7 @@ class Comments extends Component
 
     public function create()
     {
-        // gate to allow user to create comment
+        // Gate to allow user to create comment
         $this->authorize('create-comment');
 
         // Manual validation using the $rules property
@@ -51,8 +51,8 @@ class Comments extends Component
             'post_id'   => $this->postId
         ]);
 
-        // send author of the post an email that one new comment its added
-        /* $comment->user->notify(new NewCommentNotification($comment)); */
+        // Send author of the post an email that one new comment its added
+        $comment->user->notify(new NewCommentNotification($comment));
 
         // Reset the comment field after saving
         $this->comment = '';
@@ -78,8 +78,6 @@ class Comments extends Component
 
         // Reset field after saving
         $this->editingCommentId = '';
-
-        $this->resetPage();
     }
 
     public function delete($id) 

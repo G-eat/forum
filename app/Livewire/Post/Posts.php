@@ -17,8 +17,9 @@ class Posts extends Component
     public function render()
     {
         $posts = ModelsPost::select('id','title','text','user_id','created_at')
-                                ->with('user:id,name')
                                 ->withCount('comments')
+                                ->with('comments:id,text,post_id')
+                                ->with('user:id,name')
                                 ->where('title', 'like', '%' . $this->search . '%')
                                 ->orWhere('text', 'like', '%' . $this->search . '%')
                                 ->orWhereHas('comments', function ($query) {

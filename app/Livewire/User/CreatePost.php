@@ -8,10 +8,10 @@ use Livewire\Component;
 
 class CreatePost extends Component
 {
-    #[Validate('required|string|min:2|max:30')]
+    #[Validate('required|string|min:2|max:200')]
     public $title;
 
-    #[Validate('required|string|min:20|max:1000')]
+    #[Validate('required|string|min:20|max:5000')]
     public $text;
 
 
@@ -23,7 +23,7 @@ class CreatePost extends Component
 
     public function create() 
     {
-        // gate to allow user to create comment
+        // Gate to allow user to create comment
         $this->authorize('create-post');
 
         // Manual validation using the $rules property

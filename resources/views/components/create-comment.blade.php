@@ -6,7 +6,7 @@
     </div>
     <br>
 
-    <button wire:click.prevent="create" class="btn btn-primary" style="background: #0d6efd">Submit Comment</button>
+    <button wire:click.prevent="create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit Comment</button>
 </form>
 
 <hr>   

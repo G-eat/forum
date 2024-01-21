@@ -8,10 +8,10 @@ use Livewire\Component;
 
 class UpdatePost extends Component
 {
-    #[Validate('required|string|min:2|max:30')]
+    #[Validate('required|string|min:2|max:200')]
     public $title;
 
-    #[Validate('required|string|min:20|max:1000')]
+    #[Validate('required|string|min:20|max:5000')]
     public $text;
 
     public $id;

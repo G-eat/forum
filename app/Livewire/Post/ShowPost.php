@@ -11,7 +11,7 @@ class ShowPost extends Component
 
     public function mount($id)
     {
-        $this->post = Post::whereId($id)->select('id','title','text','user_id','created_at')->with('user:id,name')->withCount('comments')->first();
+        $this->post = Post::select('id','title','text','user_id','created_at')->withCount('comments')->whereId($id)->with('user:id,name')->first();
     }
 
     public function render()
