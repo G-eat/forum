@@ -69,4 +69,9 @@
     ```bash
     php artisan schedule:work
 
+10. Queue
+    ```bash
+    php artisan queue:work
+    In .env change "QUEUE_CONNECTION" to "QUEUE_CONNECTION=database"
+
 Access the application in your browser at http://127.0.0.1:8000.
